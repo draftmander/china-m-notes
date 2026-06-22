@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赏金女王 — 快速识别网站用途</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        body {
+            background: #f4f9fc;
+            color: #1e2b3a;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(145deg, #cce6f0 0%, #d9f0f5 100%);
+            border-radius: 0 0 48px 48px;
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 32px;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0e3b4a;
+        }
+        .hero h1 span {
+            background: #0f766e;
+            color: white;
+            padding: 0 14px 4px 14px;
+            border-radius: 40px;
+            display: inline-block;
+            transform: rotate(-1deg);
+            font-weight: 700;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 20px auto 10px;
+            font-size: 1.2rem;
+            color: #1f4a5a;
+            background: rgba(255,255,240,0.6);
+            padding: 14px 24px;
+            border-radius: 50px;
+            backdrop-filter: blur(2px);
+        }
+        .hero .badge {
+            display: inline-block;
+            background: white;
+            border: 1px solid #6ab7c0;
+            color: #0b5b66;
+            padding: 6px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 18px;
+            box-shadow: 0 4px 8px rgba(0,40,50,0.05);
+        }
+
+        /* 网格卡片区 (优势 / 特点) */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 48px 0 32px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 20px 24px;
+            box-shadow: 0 8px 18px rgba(40, 90, 100, 0.06);
+            border: 1px solid #d1e7ed;
+            transition: transform 0.2s, box-shadow 0.25s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 26px rgba(28, 90, 100, 0.10);
+            border-color: #8cccd6;
+        }
+        .feature-card .ico {
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            display: block;
+            line-height: 1;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0d4d5a;
+            margin: 10px 0 6px;
+        }
+        .feature-card p {
+            color: #2c4f5c;
+            font-size: 0.95rem;
+        }
+
+        /* 说明区 (用途切入) */
+        .explain-block {
+            background: #e2f0f4;
+            border-radius: 32px;
+            padding: 38px 36px;
+            margin: 40px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 32px;
+        }
+        .explain-text {
+            flex: 2 1 300px;
+        }
+        .explain-text h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #04323d;
+            margin-bottom: 16px;
+        }
+        .explain-text p {
+            margin-bottom: 16px;
+            font-size: 1.04rem;
+            color: #193f4b;
+        }
+        .explain-text .inline-link {
+            color: #0a6a72;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #75c2ce;
+            transition: 0.15s;
+        }
+        .explain-text .inline-link:hover {
+            background: #b1dfe9;
+            border-bottom-color: #02555e;
+        }
+        .explain-extra {
+            flex: 1 1 200px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 24px;
+            padding: 20px 18px;
+            backdrop-filter: blur(2px);
+            border: 1px solid #aad0da;
+        }
+        .explain-extra p {
+            font-size: 0.95rem;
+            color: #145a65;
+            margin-bottom: 8px;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            background: white;
+            border-radius: 32px;
+            padding: 32px 30px 28px;
+            margin: 30px 0 44px;
+            border: 1px solid #cbe2e8;
+        }
+        .faq-summary h2 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #08414d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .faq-item {
+            padding: 14px 0;
+            border-bottom: 1px dashed #b9d6de;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-item strong {
+            color: #0b5a65;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+        .faq-item p {
+            color: #1a4450;
+            font-size: 0.96rem;
+            margin: 2px 0 0;
+        }
+
+        /* 底部链接 */
+        .footer-links {
+            text-align: center;
+            padding: 28px 0 48px;
+            border-top: 1px solid #c1dce3;
+            margin-top: 16px;
+        }
+        .footer-links a {
+            color: #125f6b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #71b3be;
+            transition: 0.1s;
+            margin: 0 12px;
+        }
+        .footer-links a:hover {
+            border-bottom-style: solid;
+            color: #063b44;
+        }
+        .footer-note {
+            color: #40727e;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+                padding: 12px 18px;
+            }
+            .feature-grid {
+                gap: 16px;
+            }
+            .explain-block {
+                padding: 26px 20px;
+            }
+            .faq-summary {
+                padding: 24px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="container">
+        <h1>识别 · <span>赏金女王</span></h1>
+        <p>从名称到界面，快速确认平台定位与核心场景</p>
+        <div class="badge">知识型导览 · 用途一目了然</div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 优势 / 特点网格卡片 -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <span class="ico">🧭</span>
+            <h3>用途明确</h3>
+            <p>聚焦于「赏金女王」主题，一眼判断内容类型与适用人群。</p>
+        </div>
+        <div class="feature-card">
+            <span class="ico">📋</span>
+            <h3>结构直观</h3>
+            <p>板块分区清晰，从 hero 到 FAQ 逐步解释网站定位。</p>
+        </div>
+        <div class="feature-card">
+            <span class="ico">🟢</span>
+            <h3>蓝绿视觉</h3>
+            <p>蓝绿点缀配合卡片布局，降低认知负荷，移动端适配舒适。</p>
+        </div>
+        <div class="feature-card">
+            <span class="ico">⚖️</span>
+            <h3>真实克制</h3>
+            <p>不夸大、不诱导，只陈述可验证的用途与功能边界。</p>
+        </div>
+    </div>
+
+    <!-- 说明区：从用户想快速识别网站用途的角度展开 -->
+    <div class="explain-block">
+        <div class="explain-text">
+            <h2>快速识别网站用途</h2>
+            <p>当你第一次打开一个网站，最关心的问题往往是：“这个网站是干什么的？” 从名称与内容结构入手，<a href="https://main-m-bountyqueen.com" class="inline-link">赏金女王</a> 的定位并不复杂。通过 hero 标题、功能分区和 FAQ 的设计，用户可以在 10 秒内判断该平台的核心场景。</p>
+            <p>本介绍页以此为出发点，用知识型口吻拆解每个区域的设计意图：为什么卡片用蓝绿色？为什么 FAQ 只放摘要？每个细节都在辅助你快速建立心智模型。</p>
+        </div>
+        <div class="explain-extra">
+            <p>🧩 特点摘要</p>
+            <p>• 名称即关键词<br>• 卡片承载差异<br>• 问答解决疑虑</p>
+            <p style="margin-top: 8px; font-size:0.9rem;">→ 往下看 FAQ 摘要</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 (承上启下) -->
+    <div class="faq-summary">
+        <h2>❓ FAQ 摘要 · 快速答疑</h2>
+        <div class="faq-item">
+            <strong>“赏金女王” 具体指什么内容？</strong>
+            <p>网站名称直接指向“赏金”与“女王”组合的主题，常见于任务悬赏、角色扮演或特定社区文化，实际用途需以网站内实际模块为准。</p>
+        </div>
+        <div class="faq-item">
+            <strong>这个介绍页和原网站是什么关系？</strong>
+            <p>本页是为 <a href="https://main-m-bountyqueen.com" style="color:#0a6a72;text-decoration:underline;">赏金女王</a> 制作的辅助落地页，帮助新访客快速理解网站用途，不替代原站功能。</p>
+        </div>
+        <div class="faq-item">
+            <strong>页面设计为什么以蓝绿色为主？</strong>
+            <p>蓝绿色系传递冷静、可靠与探索感，配合网格卡片提升信息可读性，尤其适合知识型或工具型介绍场景。</p>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <a href="https://main-m-bountyqueen.com">赏金女王</a>
+        <span style="color:#7aacb6;">·</span>
+        <a href="#">用途说明</a>
+        <span style="color:#7aacb6;">·</span>
+        <a href="#">内容导览</a>
+        <div class="footer-note">
+            基于真实信息 · 无诱导表述 · 移动端友好
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
